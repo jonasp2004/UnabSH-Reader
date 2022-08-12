@@ -1,0 +1,123 @@
+﻿<Window x:Class="UnabSH_Reader.viewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" UseLayoutRounding="True"
+        xmlns:local="clr-namespace:UnabSH_Reader" x:Name="window" WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip"
+        Title="Artikelanzeige" Height="458" Width="642" MinHeight="450" MinWidth="800" Background="{x:Null}" Loaded="window_Loaded" Icon="/Images/profilepic.png">
+    <Grid>
+        <Border x:Name="border" Margin="10,10,10,10" UseLayoutRounding="True" CornerRadius="10,10,10,10" Background="#FFEBEBEB" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="windowScale" ScaleX="1" ScaleY="1"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+
+            <Border.Effect>
+                <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
+            </Border.Effect>
+            <Grid x:Name="content">
+                <Border x:Name="titleBar" Height="43" VerticalAlignment="Top" CornerRadius="10,10,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="1"/>
+                            <GradientStop Color="#FF2D2D2D" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <TextBlock x:Name="titleText" FontFamily="{StaticResource VarelaRound}" FontSize="16" FontWeight="Bold" TextAlignment="Center" Padding="0,11.5,0,0" MouseDown="titleText_MouseDown" Foreground="White"><Run Language="de-de" Text="Artikelanzeige"/></TextBlock>
+                        <Image Source="/Images/profilepic.png" HorizontalAlignment="Left" Width="24" Margin="10,10,0,9"/>
+                        <Image x:Name="TopBtn_CloseWindow" Source="/Images/closebutton.png" Margin="0,0,15,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" ToolTip="Schließen"></Image>
+                        <Image x:Name="TopBtn_MaximizeWindow" Source="/Images/maximizebutton.png" Margin="0,0,36,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" ToolTip="Maximieren" HorizontalAlignment="Right" Width="16"/>
+                        <Image x:Name="TopBtn_MinimizeWindow" Source="/Images/minimizebutton.png" Margin="0,0,57,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" ToolTip="Minimieren"/>
+                    </Grid>
+                </Border>
+                <Image x:Name="backgroundImage" Opacity="0.9" Stretch="UniformToFill" Margin="0,43,0,10">
+                    <Image.Effect>
+                        <BlurEffect x:Name="bkgblur"/>
+                    </Image.Effect>
+                </Image>
+                <ScrollViewer x:Name="localView" Margin="0,43,0,0">
+                    <Grid>
+                        <Border Margin="0,10,10,0" Height="120" VerticalAlignment="Top" HorizontalAlignment="Right" Width="270" Background="#CC101010" CornerRadius="5,5,5,5">
+                            <Grid>
+                                <Image x:Name="authorProfilepic" Source="/Images/profilepic.png" Margin="105,10,105,0" Height="60" VerticalAlignment="Top"></Image>
+                                <TextBlock x:Name="authorName" FontFamily="{StaticResource VarelaRound}" Foreground="White" Margin="0,75,0,30" TextAlignment="Center" FontWeight="Bold" ><Run Language="de-de" Text="Rufe Autor ab..."/></TextBlock>
+                                <TextBlock x:Name="timestamp" FontFamily="{StaticResource VarelaRound}" Foreground="White" Margin="0,95,0,10" TextAlignment="Center"><Run Language="de-de" Text="Rufe Datum ab..."/></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Grid Margin="10,10,285,0" Height="120" VerticalAlignment="Top">
+                            <TextBlock x:Name="articleTitle" TextWrapping="Wrap" FontFamily="{StaticResource VarelaRound}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"><Run Language="de-de" Text="Artikel wird geladen..."/></TextBlock>
+                        </Grid>
+                        <TextBlock x:Name="articleContent" FontFamily="{StaticResource VarelaRound}" Margin="0,130,0,0" Padding="10,60,10,0" TextWrapping="Wrap" Text="Text wird geladen..."></TextBlock>
+
+                        <Button x:Name="btn_showReaderAppereance" Margin="0,135,10,0" Height="43" VerticalAlignment="Top" HorizontalAlignment="Right" Width="170" BorderBrush="{x:Null}" Click="btn_showReaderAppereance_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Images/darkbotton.png"/>
+                            </Button.Background>
+                            <Grid Width="149">
+                                <Image Source="/Images/settings.png" Margin="0,10,0,10" HorizontalAlignment="Left" Width="20"></Image>
+                                <TextBlock Foreground="White" FontFamily="{StaticResource VarelaRound}" Text="Reader-Einstellungen" HorizontalAlignment="Left" Width="124" Margin="24,0,0,0" VerticalAlignment="Center"></TextBlock>
+                            </Grid>
+                        </Button>
+                        <Border x:Name="viewerAppereanceOptionsWindow" CornerRadius="5,5,5,5" Background="#FF1D1D1D" Margin="0,185,10,0" Height="183" VerticalAlignment="Top" HorizontalAlignment="Right" Width="319">
+                            <ScrollViewer Margin="0,0,5,0" UseLayoutRounding="True">
+                                <Grid Height="273">
+                                    <TextBlock x:Name="appereanceWindowTitle" FontFamily="{StaticResource VarelaRound}" Foreground="White" Text="Reader-Einstellungen" TextAlignment="Center" Padding="0,10,0,0" Height="34" VerticalAlignment="Top"/>
+                                    <Image x:Name="closeAppereanceWindow" Source="/Images/closebutton.png" Margin="0,10,10,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" MouseUp="closeAppereanceWindow_MouseUp" />
+                                    <TextBlock FontFamily="{StaticResource VarelaRound}" Foreground="White" Height="14" VerticalAlignment="Top" Margin="10,34,0,0" Text="Hintergrundbildunschärfe" HorizontalAlignment="Left" Width="150"/>
+                                    <Slider x:Name="backgroundblurSlider" Margin="10,53,10,0" Height="18" VerticalAlignment="Top" SmallChange="1" ValueChanged="backgroundblurSlider_ValueChanged" Maximum="30"></Slider>
+                                    <TextBlock x:Name="appereanceWindowTitle_Copy1" FontFamily="{StaticResource VarelaRound}" Foreground="White" Height="14" VerticalAlignment="Top" Margin="10,174,0,0" HorizontalAlignment="Left" Width="55"><Run Language="de-de" Text="Schriftart"/></TextBlock>
+                                    <RadioButton x:Name="fontSelector_Varela" FontFamily="{StaticResource VarelaRound}" Content="Varela Round" Foreground="White" Margin="10,193,0,0" HorizontalAlignment="Left" Width="96" Height="14" VerticalAlignment="Top" IsChecked="True" Checked="fontSelector_Varela_Checked"></RadioButton>
+                                    <RadioButton x:Name="fontSelector_Arial" Content="Arial" Foreground="White" Margin="111,193,0,0" HorizontalAlignment="Left" Width="46" Height="14" VerticalAlignment="Top" FontFamily="Arial" Checked="fontSelector_Arial_Checked"/>
+                                    <RadioButton x:Name="fontSelector_Courier" Content="Courier New" Foreground="White" Margin="162,193,0,0" HorizontalAlignment="Left" Width="100" Height="14" VerticalAlignment="Top" FontFamily="Courier New" Checked="fontSelector_Courier_Checked"/>
+                                    <RadioButton x:Name="fontSelector_Comic" Content="Comic Sans MS" Foreground="White" Margin="10,212,0,0" HorizontalAlignment="Left" Width="106" Height="14" VerticalAlignment="Top" FontFamily="Comic Sans MS" Checked="fontSelector_Comic_Checked"/>
+                                    <RadioButton x:Name="fontSelector_Segoe" Content="Segoe UI" Foreground="White" Margin="121,212,0,0" HorizontalAlignment="Left" Width="106" Height="17" VerticalAlignment="Top" Checked="fontSelector_Segoe_Checked"/>
+                                    <TextBlock FontFamily="{StaticResource VarelaRound}" Foreground="White" Height="14" VerticalAlignment="Top" Margin="10,80,0,0" HorizontalAlignment="Left" Width="157"><Run Language="de-de" Text="Hintergrundbildsichtbarkeit"/></TextBlock>
+                                    <Slider x:Name="backgroundopacitySlider" Margin="10,99,10,0" Height="18" VerticalAlignment="Top" Maximum="1" ValueChanged="backgroundopacitySlider_ValueChanged" LargeChange="0.2"/>
+                                    <TextBlock FontFamily="{StaticResource VarelaRound}" Foreground="White" Height="14" VerticalAlignment="Top" Margin="10,118,0,0" HorizontalAlignment="Left" Width="72"><Run Language="de-de" Text="Schriftgröße"/></TextBlock>
+                                    <Slider x:Name="fontSizeSlider" Margin="10,137,10,0" Height="18" VerticalAlignment="Top" Maximum="30" LargeChange="2" SmallChange="1" Minimum="1" ValueChanged="fontSizeSlider_ValueChanged"/>
+                                    <TextBlock x:Name="appereanceWindowTitle_Copy" FontFamily="{StaticResource VarelaRound}" Foreground="White" Height="14" VerticalAlignment="Top" Margin="10,231,0,0" HorizontalAlignment="Left" Width="124"><Run Text="Fensterfarbe"/><Run Language="de-de" Text=" (Thema)"/></TextBlock>
+                                    <RadioButton x:Name="themeChooser_white" FontFamily="{StaticResource VarelaRound}" Margin="10,250,0,0" Height="15" VerticalAlignment="Top" Foreground="White" Content="Weiß" HorizontalAlignment="Left" Width="58" Checked="themeChooser_white_Checked"></RadioButton>
+                                    <RadioButton x:Name="themeChooser_black" FontFamily="{StaticResource VarelaRound}" Margin="68,250,0,0" Height="15" VerticalAlignment="Top" Foreground="White" Content="Schwarz" HorizontalAlignment="Left" Width="75" Checked="themeChooser_black_Checked"/>
+                                    <RadioButton x:Name="themeChooser_sepia" FontFamily="{StaticResource VarelaRound}" Margin="143,250,0,0" Height="15" VerticalAlignment="Top" Foreground="White" Content="Sepia" HorizontalAlignment="Left" Width="56" Checked="themeChooser_sepia_Checked"/>
+                                    <RadioButton x:Name="themeChooser_night" FontFamily="{StaticResource VarelaRound}" Margin="199,250,0,0" Height="15" VerticalAlignment="Top" Foreground="White" Content="Nachtmodus" HorizontalAlignment="Left" Width="98" Checked="themeChooser_night_Checked"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                        <Button x:Name="btn_copyLink" Margin="0,135,185,0" Height="43" VerticalAlignment="Top" HorizontalAlignment="Right" Width="185" BorderBrush="{x:Null}" Click="btn_copyLink_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Images/darkbotton.png"/>
+                            </Button.Background>
+                            <Grid Width="166">
+                                <Image Source="/Images/share.png" Margin="0,10,0,10" HorizontalAlignment="Left" Width="20"/>
+                                <TextBlock Foreground="White" FontFamily="{StaticResource VarelaRound}" HorizontalAlignment="Left" Width="142" Margin="24,0,0,0" VerticalAlignment="Center"><Run Language="de-de" Text="Link zum teilen kopieren"/></TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="btn_openWebViewer" Margin="0,135,375,0" Height="43" VerticalAlignment="Top" HorizontalAlignment="Right" Width="153" BorderBrush="{x:Null}" Click="btn_openWebViewer_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Images/darkbotton.png"/>
+                            </Button.Background>
+                            <Grid Width="129">
+                                <Image Source="/Images/web.png" Margin="0,10,0,10" HorizontalAlignment="Left" Width="20"/>
+                                <TextBlock Foreground="White" FontFamily="{StaticResource VarelaRound}" HorizontalAlignment="Left" Width="105" Margin="24,0,0,0" VerticalAlignment="Center"><Run Language="de-de" Text="Webseitenansicht"/></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="1" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+        </Border>
+    </Grid>
+</Window>
+

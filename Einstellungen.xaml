@@ -1,0 +1,102 @@
+﻿<Window x:Class="UnabSH_Reader.Einstellungen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UnabSH_Reader"
+        mc:Ignorable="d" x:Name="window" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip"
+        Title="Programmeinstellungen" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="{x:Null}">
+    <Grid>
+        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="10,10,10,10" Background="White" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="windowScale" ScaleY="1"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
+            </Border.Effect>
+            <Grid x:Name="content">
+                <Border x:Name="titleBar" Height="43" VerticalAlignment="Top" CornerRadius="10,10,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="1"/>
+                            <GradientStop Color="#FF2D2D2D" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <TextBlock x:Name="titleText" FontFamily="{StaticResource VarelaRound}" FontSize="16" FontWeight="Bold" TextAlignment="Center" Padding="0,11.5,0,0" MouseDown="titleText_MouseDown" Foreground="White" Text="Programmeinstellungen"/>
+                        <Image Source="/Images/profilepic.png" HorizontalAlignment="Left" Width="24" Margin="10,10,0,9"/>
+                        <Image x:Name="TopBtn_CloseWindow" Source="/Images/closebutton.png" Margin="0,0,15,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" ToolTip="Schließen"></Image>
+                        <Image x:Name="TopBtn_MaximizeWindow" Source="/Images/maximizebutton.png" Margin="0,0,36,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" ToolTip="Maximieren" HorizontalAlignment="Right" Width="16"/>
+                        <Image x:Name="TopBtn_MinimizeWindow" Source="/Images/minimizebutton.png" Margin="0,0,57,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" ToolTip="Minimieren"/>
+                    </Grid>
+                </Border>
+                <ScrollViewer Margin="10,43,10,0" UseLayoutRounding="True">
+                    <Grid Height="386">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="382*"/>
+                            <ColumnDefinition Width="361*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="appereanceWindowTitle" FontFamily="{StaticResource VarelaRound}" Text="Reader-Einstellungen" Padding="0,10,0,0" Height="29" VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <TextBlock FontFamily="{StaticResource VarelaRound}" Height="14" VerticalAlignment="Top" Margin="10,34,0,0" Text="Hintergrundbildunschärfe" HorizontalAlignment="Left" Width="150"/>
+                        <Slider x:Name="backgroundblurSlider" Margin="10,53,10,0" Height="18" VerticalAlignment="Top" SmallChange="1" ValueChanged="backgroundblurSlider_ValueChanged" Maximum="30"></Slider>
+                        <TextBlock x:Name="appereanceWindowTitle_Copy1" FontFamily="{StaticResource VarelaRound}" Height="14" VerticalAlignment="Top" Margin="10,174,0,0" HorizontalAlignment="Left" Width="55"><Run Language="de-de" Text="Schriftart"/></TextBlock>
+                        <RadioButton x:Name="fontSelector_Varela" FontFamily="{StaticResource VarelaRound}" Content="Varela Round" Margin="10,193,0,0" HorizontalAlignment="Left" Width="96" Height="14" VerticalAlignment="Top" IsChecked="True" Checked="fontSelector_Varela_Checked"></RadioButton>
+                        <RadioButton x:Name="fontSelector_Arial" Content="Arial" Margin="111,193,0,0" HorizontalAlignment="Left" Width="46" Height="14" VerticalAlignment="Top" FontFamily="Arial" Checked="fontSelector_Arial_Checked"/>
+                        <RadioButton x:Name="fontSelector_Courier" Content="Courier New" Margin="161,193,0,0" HorizontalAlignment="Left" Width="100" Height="14" VerticalAlignment="Top" FontFamily="Courier New" Checked="fontSelector_Courier_Checked"/>
+                        <RadioButton x:Name="fontSelector_Comic" Content="Comic Sans MS" Margin="267,193,0,0" HorizontalAlignment="Left" Width="106" Height="14" VerticalAlignment="Top" FontFamily="Comic Sans MS" Checked="fontSelector_Comic_Checked"/>
+                        <RadioButton x:Name="fontSelector_Segoe" Content="Segoe UI" Margin="10,212,0,0" HorizontalAlignment="Left" Width="70" Height="17" VerticalAlignment="Top" Checked="fontSelector_Segoe_Checked"/>
+                        <TextBlock FontFamily="{StaticResource VarelaRound}" Height="14" VerticalAlignment="Top" Margin="10,80,0,0" HorizontalAlignment="Left" Width="157"><Run Language="de-de" Text="Hintergrundbildsichtbarkeit"/></TextBlock>
+                        <Slider x:Name="backgroundopacitySlider" Margin="10,99,10,0" Height="18" VerticalAlignment="Top" Maximum="1" ValueChanged="backgroundopacitySlider_ValueChanged" LargeChange="0.2"/>
+                        <TextBlock FontFamily="{StaticResource VarelaRound}" Height="14" VerticalAlignment="Top" Margin="10,118,0,0" HorizontalAlignment="Left" Width="72"><Run Language="de-de" Text="Schriftgröße"/></TextBlock>
+                        <TextBlock x:Name="appereanceWindowTitle_Copy" FontFamily="{StaticResource VarelaRound}" Height="14" VerticalAlignment="Top" Margin="10,231,0,0" HorizontalAlignment="Left" Width="124"><Run Text="Fensterfarbe"/><Run Language="de-de" Text=" (Thema)"/></TextBlock>
+                        <RadioButton x:Name="themeChooser_white" FontFamily="{StaticResource VarelaRound}" Margin="10,250,0,0" Height="15" VerticalAlignment="Top" Content="Weiß" HorizontalAlignment="Left" Width="58" Checked="themeChooser_white_Checked"></RadioButton>
+                        <RadioButton x:Name="themeChooser_black" FontFamily="{StaticResource VarelaRound}" Margin="68,250,0,0" Height="15" VerticalAlignment="Top" Content="Schwarz" HorizontalAlignment="Left" Width="75" Checked="themeChooser_black_Checked"/>
+                        <RadioButton x:Name="themeChooser_sepia" FontFamily="{StaticResource VarelaRound}" Margin="143,250,0,0" Height="15" VerticalAlignment="Top" Content="Sepia" HorizontalAlignment="Left" Width="56" Checked="themeChooser_sepia_Checked"/>
+                        <RadioButton x:Name="themeChooser_night" FontFamily="{StaticResource VarelaRound}" Margin="199,250,0,0" Height="15" VerticalAlignment="Top" Content="Nachtmodus" HorizontalAlignment="Left" Width="98" Checked="themeChooser_night_Checked"/>
+                        <TextBlock x:Name="appereanceWindowTitle_Copy2" FontFamily="{StaticResource VarelaRound}" Padding="0,10,0,0" Height="34" VerticalAlignment="Top" FontWeight="Bold" Margin="10,0,11,0" Grid.Column="1"><Run Language="de-de" Text="Programmvorschau"/></TextBlock>
+                        <Border x:Name="PreviewWindow" Grid.Column="1" Margin="10,39,0,0" Height="116" VerticalAlignment="Top" HorizontalAlignment="Left" Width="224" Background="#FFE8E8E8" CornerRadius="5" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="270" BlurRadius="10" ShadowDepth="2"/>
+                            </Border.Effect>
+                            <Grid>
+                                <Border CornerRadius="5,5,0,0" Margin="0,0,0,95">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="1"/>
+                                            <GradientStop Color="#FF3C3C3C" Offset="0"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid x:Name="PreviewTopBar" Height="21" VerticalAlignment="Top">
+                                        <Image Source="/Images/closebutton.png" Margin="208,5,5,5"/>
+                                    </Grid>
+                                </Border>
+                                <Image x:Name="prev_image" Source="/20220306.png" Margin="0,21,0,0" Stretch="UniformToFill" Opacity="0.2">
+                                    <Image.Effect>
+                                        <BlurEffect x:Name="prefimgblur" Radius="7"/>
+                                    </Image.Effect>
+                                </Image>
+                                <TextBlock x:Name="previewTitle" FontFamily="{StaticResource VarelaRound}" Margin="5,26,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201" FontSize="14" FontWeight="Bold"><Run Text="Verpassen Sie nichts mehr!"/><LineBreak/><Run/></TextBlock>
+                                <TextBlock x:Name="previewText" FontFamily="{StaticResource VarelaRound}" Margin="6,49,6,0" TextWrapping="Wrap"><Run Text="Denn, jetzt mal ehrlich! Was beansprucht mehr Zeit und Mühe zwischen einer Webseite aufzurufen oder eine Anwendung zu starten?"/><LineBreak/><Run Text="- Ganz genau! Die Erste Option. Daher haben wir nun eine Desktopanwendung entwickelt, damit Sie topaktuell bleiben."/></TextBlock>
+                            </Grid>
+                        </Border>
+                        <TextBlock x:Name="errorPrompt" FontFamily="{StaticResource VarelaRound}" Margin="10,168,0,0" Grid.Column="1" Height="32" VerticalAlignment="Top" Foreground="Red" TextWrapping="Wrap"><Run Text="Aufgrund eines internen Fehlers wird die Vorschau möglicherweise nicht korrekt dargestell"/><Run Language="de-de" Text="t"/><Run Text="."/></TextBlock>
+                        <Slider x:Name="textSizeSlinder" FontSize="12" Margin="10,137,10,0" Height="18" VerticalAlignment="Top" Maximum="30" ValueChanged="textSizeSlinder_ValueChanged" Minimum="1" SmallChange="1"/>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="1" Duration="0:0:0.15" />
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+        </Border>
+    </Grid>
+</Window>

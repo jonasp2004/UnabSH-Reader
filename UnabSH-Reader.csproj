@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>UnabSH_Reader</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
+    <PlatformTarget>x64</PlatformTarget>
+    <Title>UnabSH-Reader</Title>
+    <Version>1</Version>
+    <Authors>Redaktion Unabhängige Nachrichten SH Inh. Hans Schwürloh</Authors>
+    <Company>Redaktion Unabhängige Nachrichten SH Inh. Hans Schwürloh</Company>
+    <Product>UnabSH-Reader</Product>
+    <Description>Was beansprucht mehr Zeit und Mühe zwischen einer Webseite aufzurufen oder eine Anwendung zu starten?
+- Ganz genau! Die Erste Option. Daher haben wir nun eine Desktopanwendung entwickelt, damit Sie topaktuell bleiben.</Description>
+    <Copyright>©2022 Unabhängige Nachrichten SH</Copyright>
+    <PackageProjectUrl>unabsh.000webhostapp.com</PackageProjectUrl>
+    <PackageIcon>appicon_small.ico</PackageIcon>
+    <RepositoryUrl>https://github.com/jonasp2004/UnabSH-Reader</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="20220306.png" />
+    <None Remove="Fonts\VarelaRound.ttf" />
+    <None Remove="Images\closebutton.png" />
+    <None Remove="Images\darkbotton.png" />
+    <None Remove="Images\maximizebutton.png" />
+    <None Remove="Images\minimizebutton.png" />
+    <None Remove="Images\profilepic.png" />
+    <None Remove="Images\settings.png" />
+    <None Remove="Images\share.png" />
+    <None Remove="Images\stop-sign.png" />
+    <None Remove="Images\web.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Downloads\appicon_small.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+    <PackageReference Include="MySql.Data" Version="8.0.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="20220306.png" />
+    <Resource Include="Images\darkbotton.png" />
+    <Resource Include="Images\minimizebutton.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\VarelaRound.ttf" />
+    <Resource Include="Images\closebutton.png" />
+    <Resource Include="Images\maximizebutton.png" />
+    <Resource Include="Images\profilepic.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\share.png" />
+    <Resource Include="Images\stop-sign.png" />
+    <Resource Include="Images\web.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
