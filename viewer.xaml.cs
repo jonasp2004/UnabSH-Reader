@@ -81,7 +81,7 @@ namespace UnabSH_Reader {
             webView.Navigate("https://unabsh.000webhostapp.com/news/view.php?id=" + Properties.Settings.Default.tempSelectedID);
         }
 
-        void FetchWebData() {
+        public async void FetchWebData() {
             try { 
             using (var client = new WebClient()) {
                 string html = client.DownloadString("https://unabsh.000webhostapp.com/news/view.php?id=" + Properties.Settings.Default.tempSelectedID);

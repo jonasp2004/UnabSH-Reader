@@ -7,11 +7,17 @@
         mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip"
         Title="UnabSH-Reader" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="{x:Null}">
     <Grid>
-        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="10,10,10,10" Background="#FFEBEBEB">
+        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="10,10,10,10" Background="#FFEBEBEB" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="windowScale" ScaleX="1" ScaleY="1"/>
+                </TransformGroup>
+            </Border.RenderTransform>
             <Border.Effect>
                 <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
             </Border.Effect>
-            <Grid x:Name="content">
+
+            <Grid x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Height="430" Width="780">
                 <Border x:Name="titleBar" Height="43"  Background="#FFD1D1D1" VerticalAlignment="Top" CornerRadius="10,10,0,0">
                     <Grid>
                         <TextBlock x:Name="titleText" Text="UnabSH-Reader" FontFamily="{StaticResource VarelaRound}" FontSize="16" FontWeight="Bold" TextAlignment="Center" Padding="0,11.5,0,0" MouseDown="titleText_MouseDown"></TextBlock>
@@ -41,6 +47,16 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0.2"  To="1" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.2" To="1" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
         </Border>
     </Grid>
 </Window>
