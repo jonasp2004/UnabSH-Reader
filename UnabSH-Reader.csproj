@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>UnabSH_Reader</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\VarelaRound.ttf" />
+    <None Remove="Images\closebutton.png" />
+    <None Remove="Images\darkbotton.png" />
+    <None Remove="Images\maximizebutton.png" />
+    <None Remove="Images\minimizebutton.png" />
+    <None Remove="Images\profilepic.png" />
+    <None Remove="Images\settings.png" />
+    <None Remove="Images\share.png" />
+    <None Remove="Images\web.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+    <PackageReference Include="MySql.Data" Version="8.0.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\darkbotton.png" />
+    <Resource Include="Images\minimizebutton.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\VarelaRound.ttf" />
+    <Resource Include="Images\closebutton.png" />
+    <Resource Include="Images\maximizebutton.png" />
+    <Resource Include="Images\profilepic.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\share.png" />
+    <Resource Include="Images\web.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
