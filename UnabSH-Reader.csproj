@@ -10,7 +10,7 @@
     <ApplicationIcon>appicon.ico</ApplicationIcon>
     <PlatformTarget>x64</PlatformTarget>
     <Title>UnabSH-Reader</Title>
-    <Version>1</Version>
+    <Version>1.5</Version>
     <Authors>Redaktion Unabhängige Nachrichten SH Inh. Hans Schwürloh</Authors>
     <Company>Redaktion Unabhängige Nachrichten SH Inh. Hans Schwürloh</Company>
     <Product>UnabSH-Reader</Product>
@@ -20,6 +20,8 @@
     <PackageProjectUrl>unabsh.000webhostapp.com</PackageProjectUrl>
     <PackageIcon>appicon_small.ico</PackageIcon>
     <RepositoryUrl>https://github.com/jonasp2004/UnabSH-Reader</RepositoryUrl>
+    <PackageReleaseNotes> - Performance-Behebungen
+ - feinere UI-Optimierungen</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,13 +29,16 @@
     <None Remove="Fonts\VarelaRound.ttf" />
     <None Remove="Images\closebutton.png" />
     <None Remove="Images\darkbotton.png" />
+    <None Remove="Images\j_noPicture.png" />
     <None Remove="Images\maximizebutton.png" />
     <None Remove="Images\minimizebutton.png" />
     <None Remove="Images\profilepic.png" />
     <None Remove="Images\settings.png" />
     <None Remove="Images\share.png" />
     <None Remove="Images\stop-sign.png" />
+    <None Remove="Images\walterscheel.png" />
     <None Remove="Images\web.png" />
+    <None Remove="unabs-logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +60,7 @@
   <ItemGroup>
     <Resource Include="20220306.png" />
     <Resource Include="Images\darkbotton.png" />
+    <Resource Include="Images\j_noPicture.png" />
     <Resource Include="Images\minimizebutton.png" />
   </ItemGroup>
 
@@ -66,7 +72,9 @@
     <Resource Include="Images\settings.png" />
     <Resource Include="Images\share.png" />
     <Resource Include="Images\stop-sign.png" />
+    <Resource Include="Images\walterscheel.png" />
     <Resource Include="Images\web.png" />
+    <Resource Include="unabs-logo.png" />
   </ItemGroup>
 
   <ItemGroup>

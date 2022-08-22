@@ -110,7 +110,7 @@ namespace UnabSH_Reader
             GarbageCollector();
         }
 
-        void FetchWebData() {
+        public void FetchWebData() {
             try { 
             using (var client = new WebClient()) {
                 string html = client.DownloadString("https://unabsh.000webhostapp.com/news/appviewData.php?title=" + Properties.Settings.Default.tempSelectedID);
@@ -150,21 +150,12 @@ namespace UnabSH_Reader
                     foreach (HtmlNode node in nodes) {
                         appID = node.InnerText;
                     }
-
-                    var fullFilePath = @"https://unabsh.000webhostapp.com/assets/profilepic.png";
-                    if (authorName.Text == "Jonas")
-                    {
-                        fullFilePath = @"https://unabsh.000webhostapp.com/assets/j_noPicture.jpg";
-                    }
-                    else if (authorName.Text == "Walter Scheel")
-                    {
-                        fullFilePath = @"https://unabsh.000webhostapp.com/assets/walterscheel.jpg";
-                    }
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-                    bitmap.EndInit();
-                    authorProfilepic.Source = bitmap;
+                authorProfilepic.Source = new BitmapImage(new Uri("pack://application:,,,/Images/profilepic.png"));
+                if (authorName.Text == "Jonas") {
+                    authorProfilepic.Source = new BitmapImage(new Uri("pack://application:,,,/Images/j_noPicture.png"));
+                } else if (authorName.Text == "Walter Scheel") {
+                    authorProfilepic.Source = new BitmapImage(new Uri("pack://application:,,,/Images/walterscheel.png"));
+                }
 
 
                     var backgroundURI = @"https://unabsh.000webhostapp.com/news/images/" + appID + ".png";
@@ -251,7 +242,7 @@ namespace UnabSH_Reader
         }
 
         private void themeChooser_white_Checked(object sender, RoutedEventArgs e) {
-            content.Background = Brushes.White;
+            border.Background = Brushes.White;
             articleContent.Foreground = Brushes.Black;
             articleTitle.Foreground = Brushes.Black;
             GarbageCollector();
@@ -259,21 +250,21 @@ namespace UnabSH_Reader
         }
 
         private void themeChooser_black_Checked(object sender, RoutedEventArgs e) {
-            content.Background = new SolidColorBrush(Color.FromRgb(14, 14, 14));
+            border.Background = new SolidColorBrush(Color.FromRgb(14, 14, 14));
             articleContent.Foreground = Brushes.White;
             articleTitle.Foreground = Brushes.White;
             GarbageCollector();
         }
 
         private void themeChooser_sepia_Checked(object sender, RoutedEventArgs e) {
-            content.Background = new SolidColorBrush(Color.FromRgb(236, 194, 151));
+            border.Background = new SolidColorBrush(Color.FromRgb(236, 194, 151));
             articleContent.Foreground = Brushes.Black;
             articleTitle.Foreground = Brushes.Black;
             GarbageCollector();
         }
 
         private void themeChooser_night_Checked(object sender, RoutedEventArgs e) {
-            content.Background = Brushes.Black;
+            border.Background = Brushes.Black;
             articleContent.Foreground = Brushes.White;
             articleTitle.Foreground = Brushes.White;
             GarbageCollector();

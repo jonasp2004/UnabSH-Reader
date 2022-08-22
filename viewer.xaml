@@ -4,16 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" UseLayoutRounding="True"
         xmlns:local="clr-namespace:UnabSH_Reader" x:Name="window" WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip"
+        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Topmost="True"
         Title="Artikelanzeige" Height="458" Width="642" MinHeight="450" MinWidth="800" Background="{x:Null}" Loaded="window_Loaded" Icon="/Images/profilepic.png">
     <Grid>
         <Border x:Name="border" Margin="10,10,10,10" UseLayoutRounding="True" CornerRadius="10,10,10,10" Background="#FFEBEBEB" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform x:Name="windowScale" ScaleX="1" ScaleY="1"/>
+                    <ScaleTransform x:Name="windowScale"/>
                 </TransformGroup>
             </Border.RenderTransform>
-
             <Border.Effect>
                 <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
             </Border.Effect>
@@ -61,8 +60,8 @@
                                 <TextBlock Foreground="White" FontFamily="{StaticResource VarelaRound}" Text="Reader-Einstellungen" HorizontalAlignment="Left" Width="124" Margin="24,0,0,0" VerticalAlignment="Center"></TextBlock>
                             </Grid>
                         </Button>
-                        <Border x:Name="viewerAppereanceOptionsWindow" CornerRadius="5,5,5,5" Background="#FF1D1D1D" Margin="0,185,10,0" Height="183" VerticalAlignment="Top" HorizontalAlignment="Right" Width="319">
-                            <ScrollViewer Margin="0,0,5,0" UseLayoutRounding="True">
+                        <Border x:Name="viewerAppereanceOptionsWindow" CornerRadius="5" Background="#FF1D1D1D" Margin="0,185,10,0" Height="183" VerticalAlignment="Top" HorizontalAlignment="Right" Width="319">
+                            <ScrollViewer UseLayoutRounding="True">
                                 <Grid Height="273">
                                     <TextBlock x:Name="appereanceWindowTitle" FontFamily="{StaticResource VarelaRound}" Foreground="White" Text="Reader-Einstellungen" TextAlignment="Center" Padding="0,10,0,0" Height="34" VerticalAlignment="Top"/>
                                     <Image x:Name="closeAppereanceWindow" Source="/Images/closebutton.png" Margin="0,10,10,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" MouseUp="closeAppereanceWindow_MouseUp" />
@@ -111,8 +110,8 @@
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="1" Duration="0:0:0.3" />
-                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="1" Duration="0:0:0.15" />
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.15" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>

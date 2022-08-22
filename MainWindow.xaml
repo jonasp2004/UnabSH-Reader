@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnabSH_Reader" x:Name="window" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip"
-        Title="UnabSH-Reader" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="{x:Null}">
+        Title="UnabSH-Reader" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="{x:Null}" Initialized="window_Initialized">
     <Grid>
-        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="10,10,10,10" Background="#FFE3E1E1">
+        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="10,10,10,10" Background="#FFE3E1E1" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="windowScale"/>
+                </TransformGroup>
+            </Border.RenderTransform>
             <Border.Effect>
                 <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
             </Border.Effect>
@@ -32,14 +37,10 @@
                         <Image x:Name="TopBtn_MinimizeWindow" Source="/Images/minimizebutton.png" Margin="0,0,57,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" ToolTip="Minimieren"/>
                     </Grid>
                 </Border>
-                <TextBlock x:Name="titletext" FontFamily="{StaticResource VarelaRound}" FontSize="25" FontWeight="Bold" Margin="21,66,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="458" Foreground="Black"><Run Text="Guten Tag"/><Run Language="de-de" Text=" und Herzlich Willkommen!"/></TextBlock>
-                <TextBlock x:Name="lastUpdatedIndicator" FontFamily="{StaticResource VarelaRound}" FontSize="15" FontWeight="Bold" Margin="21,99,104,0" Height="21" VerticalAlignment="Top" Foreground="Black"><Run Text="Um anzufangen, klicken Sie bitte auf "/><Run Language="de-de" Text="&quot;A"/><Run Text="ktualisieren"/><Run Language="de-de" Text="&quot;"/><Run Text="."/></TextBlock>
-                <Button Margin="0,81,10,0" BorderBrush="{x:Null}" Foreground="White" Content="Aktualisieren" HorizontalAlignment="Right" Width="89" Height="27" VerticalAlignment="Top" Click="Button_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Images/darkbotton.png"/>
-                    </Button.Background>
-                </Button>
-                <ListView x:Name="articleView" Margin="10,125,10,10" FontFamily="{StaticResource VarelaRound}" SelectionChanged="articleView_SelectionChanged" FontSize="16" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Image Source="/unabs-logo.png" Margin="308,55,308,334"></Image>
+                <TextBlock x:Name="titletext" FontFamily="{StaticResource VarelaRound}" FontSize="25" FontWeight="Bold" Margin="0,102,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Center" Width="458" Foreground="Black"><Run Text="Guten Tag"/><Run Language="de-de" Text=" und Herzlich Willkommen!"/></TextBlock>
+                <TextBlock x:Name="lastUpdatedIndicator" FontFamily="{StaticResource VarelaRound}" FontSize="15" FontWeight="Bold" Margin="87,136,87,0" Height="21" VerticalAlignment="Top" Foreground="Black" TextAlignment="Center"><Run Language="de-de" Text="Benötigte Daten werden abgefangen"/></TextBlock>
+                <ListView x:Name="articleView" Margin="10,162,10,10" FontFamily="{StaticResource VarelaRound}" SelectionChanged="articleView_SelectionChanged" FontSize="16" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="750"/>
@@ -47,6 +48,16 @@
                     </ListView.View>
                 </ListView>
             </Grid>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="0.1" To="1" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetName="windowScale" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0.1" To="1" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
         </Border>
     </Grid>
 </Window>

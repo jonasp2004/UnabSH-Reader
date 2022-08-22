@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,6 +15,8 @@ namespace UnabSH_Reader {
         public string tempArticleID;
         public string tempArticleName;
         public string tempArticleAuthor;
+
+        public string tempArtOverview;
         public MainWindow() {
             InitializeComponent();
         }
@@ -23,23 +26,11 @@ namespace UnabSH_Reader {
             GC.WaitForPendingFinalizers();
         }
 
-        public async void FetchData() {
+        private async void FetchData() {
             try {
-                using (var client = new WebClient()) {
-                    string html = client.DownloadString("https://unabsh.000webhostapp.com/articleList.php");
-                    HtmlDocument doc = new HtmlDocument();
-                    doc.LoadHtml(html);
-                    var nodes = doc.DocumentNode.SelectNodes("//span")
-                        .Where(d => d.Attributes.Contains("id"))
-                        .Where(d => d.Attributes["id"].Value == "app_newsCounter");
-                    foreach (HtmlNode node in nodes) {
-                        tempNewsCounter = Convert.ToInt32(node.InnerText);
-                        lastUpdatedIndicator.Text = "Am " + DateTime.Now + " gab es " + tempNewsCounter.ToString() + " Nachrichten";
-                    }
-
-                    FetchTitles();
-                    
-                }
+                await Task.Run(FangeWebseiteAb);
+                lastUpdatedIndicator.Text = tempArtOverview;
+                FetchTitles();
             } catch (Exception ex) {
                 Properties.Settings.Default.tempErrMsg = ex.Message.ToString();
                 err_dialog error = new();
@@ -48,9 +39,23 @@ namespace UnabSH_Reader {
             GarbageCollector();
         }
 
-        public async void FetchTitles() {
-            using (var client = new WebClient())
-            {
+        internal async Task FangeWebseiteAb() {
+            using (var client = new WebClient()) {
+                string html = client.DownloadString("https://unabsh.000webhostapp.com/articleList.php");
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(html);
+                var nodes = doc.DocumentNode.SelectNodes("//span")
+                        .Where(d => d.Attributes.Contains("id"))
+                        .Where(d => d.Attributes["id"].Value == "app_newsCounter");
+                foreach (HtmlNode node in nodes) {
+                    tempNewsCounter = Convert.ToInt32(node.InnerText);
+                    tempArtOverview = "Am " + DateTime.Now + " gab es " + tempNewsCounter.ToString() + " Nachrichten";
+                }
+            }
+        }
+
+        internal async Task FetchTitles() {
+            using (var client = new WebClient()) {
                 //Hier fängt das eigentliche Abrufen der Daten an
                 string html = client.DownloadString("https://unabsh.000webhostapp.com/articleList.php");
                 HtmlDocument doc = new HtmlDocument();
@@ -96,12 +101,6 @@ namespace UnabSH_Reader {
             GarbageCollector();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            FetchData();
-            lastUpdatedIndicator.Text = "Am " + DateTime.Now + " gab es " + tempNewsCounter.ToString() + " Nachrichten";
-            GarbageCollector();
-        }
-
         private void articleView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Properties.Settings.Default.tempSelectedID = articleView.SelectedItems[0].ToString();
             viewer view = new viewer();
@@ -112,6 +111,12 @@ namespace UnabSH_Reader {
         private void Button_Click_1(object sender, RoutedEventArgs e) {
             Einstellungen settings = new();
             settings.ShowDialog();
+        }
+
+        private void window_Initialized(object sender, EventArgs e) {
+            FetchData();
+            lastUpdatedIndicator.Text = "Am " + DateTime.Now + " gab es " + tempNewsCounter.ToString() + " Nachrichten";
+            GarbageCollector();
         }
     }
 }
