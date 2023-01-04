@@ -146,8 +146,6 @@ namespace UnabSH_Reader {
                 bitmapImage.UriSource = new Uri(backgroundURI, UriKind.Absolute);
                 bitmapImage.EndInit();
                 backgroundImage.Source = bitmapImage;
-                Bitmap bmpImg = colorConv.BitmapImage2Bitmap(bitmapImage);
-                brdr_header.Background = colorConv.GetDominantColor(bmpImg);
 
                 if (Properties.Settings.Default.lieblingsAutoren.Contains(txt_authorName.Text)) {
                     btn_addFavouriteAuthor.Content = "Lieblingsautor";

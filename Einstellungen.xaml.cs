@@ -123,7 +123,7 @@ namespace UnabSH_Reader {
         private void themeChooser_white_Checked(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.stdAussehen = "std";
             Properties.Settings.Default.Save();
-            PreviewWindow.Background = new SolidColorBrush(colorConv.FromRgb(232, 232, 232));
+            PreviewWindow.Background = new SolidColorBrush(Color.FromRgb(232, 232, 232));
             previewText.Foreground = Brushes.Black;
             previewTitle.Foreground = Brushes.Black;
             GarbageCollector();
@@ -132,7 +132,7 @@ namespace UnabSH_Reader {
         private void themeChooser_black_Checked(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.stdAussehen = "black";
             Properties.Settings.Default.Save();
-            PreviewWindow.Background = new SolidColorBrush(colorConv.FromRgb(14, 14, 14));
+            PreviewWindow.Background = new SolidColorBrush(Color.FromRgb(14, 14, 14));
             previewText.Foreground = Brushes.White;
             previewTitle.Foreground = Brushes.White;
             GarbageCollector();
@@ -141,7 +141,7 @@ namespace UnabSH_Reader {
         private void themeChooser_sepia_Checked(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.stdAussehen = "sepia";
             Properties.Settings.Default.Save();
-            PreviewWindow.Background = new SolidColorBrush(colorConv.FromRgb(236, 194, 151));
+            PreviewWindow.Background = new SolidColorBrush(Color.FromRgb(236, 194, 151));
             previewText.Foreground = Brushes.Black;
             previewTitle.Foreground = Brushes.Black;
             GarbageCollector();
