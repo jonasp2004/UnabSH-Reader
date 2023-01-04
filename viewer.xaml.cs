@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,6 +11,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Windows.Networking.NetworkOperators;
+using Brushes = System.Windows.Media.Brushes;
+using Color = System.Windows.Media.Color;
+using FontFamily = System.Windows.Media.FontFamily;
 
 namespace UnabSH_Reader {
     public partial class viewer : Window {
@@ -141,6 +146,8 @@ namespace UnabSH_Reader {
                 bitmapImage.UriSource = new Uri(backgroundURI, UriKind.Absolute);
                 bitmapImage.EndInit();
                 backgroundImage.Source = bitmapImage;
+                Bitmap bmpImg = colorConv.BitmapImage2Bitmap(bitmapImage);
+                brdr_header.Background = colorConv.GetDominantColor(bmpImg);
 
                 if (Properties.Settings.Default.lieblingsAutoren.Contains(txt_authorName.Text)) {
                     btn_addFavouriteAuthor.Content = "Lieblingsautor";

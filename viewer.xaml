@@ -39,7 +39,7 @@
                 </Image>
                 <ScrollViewer x:Name="localView" Margin="0,30,0,0" VerticalScrollBarVisibility="Hidden">
                     <Grid>
-                        <Border Margin="10,10,0,0" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="427" Background="#CC101010" CornerRadius="5,5,5,5">
+                        <Border x:Name="brdr_header" Margin="10,10,0,0" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Width="427" Background="#CC101010" CornerRadius="5,5,5,5">
                             <Grid>
                                 <Image x:Name="authorProfilepic" Source="/Images/unknown-person.png" Margin="10,10,379,0" Height="39" VerticalAlignment="Top" MouseEnter="authorProfilepic_MouseEnter" MouseLeave="authorProfilepic_MouseLeave">
                                     <Image.Triggers>
