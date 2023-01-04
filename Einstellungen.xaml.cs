@@ -3,12 +3,27 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace UnabSH_Reader
-{
+namespace UnabSH_Reader {
 
     public partial class Einstellungen : Window {
+
+        public FontFamily tempSegoe = new FontFamily("Segoe UI");
+        public FontFamily tempComicSans = new FontFamily("Comic Sans MS");
+        public FontFamily tempCourier = new FontFamily("Courier New");
+        public FontFamily tempArial = new FontFamily("Arial");
+        public FontFamily tempVarela = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Varela Round");
+
+        internal double imageBlurValue;
+        internal double fontSizeValue;
+        internal float backgroundVisibilityValue;
+
         public Einstellungen() {
             InitializeComponent();
+            window_btnHints.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void window_Loaded(object sender, RoutedEventArgs e) {
             RestoreSettings();
         }
 
@@ -52,71 +67,57 @@ namespace UnabSH_Reader
         }
 
         private void backgroundblurSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            prefimgblur.Radius = backgroundblurSlider.Value / 2;
-            Properties.Settings.Default.Hintergrundunschärfe = backgroundblurSlider.Value;
-            Properties.Settings.Default.Save();
-            GarbageCollector();
+            imageBlurValue = backgroundblurSlider.Value;
+            txt_blurVal.Text = imageBlurValue.ToString();
+            prefimgblur.Radius = imageBlurValue;
         }
 
         private void backgroundopacitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            prev_image.Opacity = backgroundopacitySlider.Value;
-            Properties.Settings.Default.Bildsichtbarkeit = backgroundopacitySlider.Value;
-            Properties.Settings.Default.Save();
-            GarbageCollector();
+            backgroundVisibilityValue = (float)backgroundopacitySlider.Value;
+            txt_visibilityVal.Text = backgroundVisibilityValue.ToString();
+            prev_image.Opacity = backgroundVisibilityValue;
         }
 
-        private void textSizeSlinder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            previewText.FontSize = textSizeSlinder.Value;
-            Properties.Settings.Default.Bildsichtbarkeit = textSizeSlinder.Value;
-            Properties.Settings.Default.Save();
-            GarbageCollector();
+        private void textSizeSlinder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            fontSizeValue = textSizeSlinder.Value;
+            previewText.FontSize = fontSizeValue;
         }
 
         private void fontSelector_Varela_Checked(object sender, RoutedEventArgs e) {
-            //Macht Probleme
-            /*try {
-                previewText.FontFamily = FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Varela Round");
-                previewTitle.FontFamily = FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Varela Round");
-                errorPrompt.Visibility = Visibility.Collapsed;
-            } catch {
-                errorPrompt.Visibility = Visibility.Visible;
-            }*/
+            try {
+                previewText.FontFamily = tempVarela;
+                previewTitle.FontFamily = tempVarela;
+            } catch { }
             Properties.Settings.Default.stdSchriftart = "varela";
             Properties.Settings.Default.Save();
-            GarbageCollector();
         }
 
         private void fontSelector_Arial_Checked(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.stdSchriftart = "arial";
             Properties.Settings.Default.Save();
-            previewText.FontFamily = new FontFamily("Arial");
-            previewTitle.FontFamily = new FontFamily("Arial");
-            GarbageCollector();
+            previewText.FontFamily = tempArial;
+            previewTitle.FontFamily = tempArial;
         }
 
         private void fontSelector_Courier_Checked(object sender, RoutedEventArgs e) {
+            previewText.FontFamily = tempCourier;
+            previewTitle.FontFamily = tempCourier;
             Properties.Settings.Default.stdSchriftart = "courier";
             Properties.Settings.Default.Save();
-            previewText.FontFamily = new FontFamily("Courier New");
-            previewTitle.FontFamily = new FontFamily("Courier New");
-            GarbageCollector();
         }
 
         private void fontSelector_Comic_Checked(object sender, RoutedEventArgs e) {
+            previewText.FontFamily = tempComicSans;
+            previewTitle.FontFamily = tempComicSans;
             Properties.Settings.Default.stdSchriftart = "comic";
             Properties.Settings.Default.Save();
-            previewText.FontFamily = new FontFamily("Comic Sans MS");
-            previewTitle.FontFamily = new FontFamily("Comic Sans MS");
-            GarbageCollector();
         }
 
         private void fontSelector_Segoe_Checked(object sender, RoutedEventArgs e) {
+            previewText.FontFamily = tempSegoe;
+            previewTitle.FontFamily = tempSegoe;
             Properties.Settings.Default.stdSchriftart = "segoe";
             Properties.Settings.Default.Save();
-            previewText.FontFamily = new FontFamily("Segoe UI");
-            previewTitle.FontFamily = new FontFamily("Segoe UI");
-            GarbageCollector();
         }
 
         private void themeChooser_white_Checked(object sender, RoutedEventArgs e) {
@@ -152,6 +153,56 @@ namespace UnabSH_Reader
             PreviewWindow.Background = Brushes.Black;
             previewText.Foreground = Brushes.White;
             previewTitle.Foreground = Brushes.White;
+            GarbageCollector();
+        }
+
+        private void btn_save_Click(object sender, RoutedEventArgs e) {
+            Properties.Settings.Default.Bildsichtbarkeit = (float)fontSizeValue;
+            Properties.Settings.Default.Bildsichtbarkeit = backgroundVisibilityValue;
+            Properties.Settings.Default.Hintergrundunschärfe = imageBlurValue;
+            Properties.Settings.Default.Save();
+        }
+
+        private void TopBtn_CloseWindow_MouseEnter(object sender, MouseEventArgs e) {
+            window_btnHints.Visibility = Visibility.Visible;
+            window_btnHints.Margin = new Thickness(14, 34, 0, 0);
+            TopBtn_CloseWindow.Fill = Brushes.DarkRed;
+            txt_windowBtnHint.Text = "Schließen";
+        }
+
+        private void TopBtn_CloseWindow_MouseLeave(object sender, MouseEventArgs e) {
+            window_btnHints.Visibility = Visibility.Collapsed;
+            TopBtn_CloseWindow.Fill = Brushes.Red;
+            GarbageCollector();
+        }
+
+        private void TopBtn_MinimizeWindow_MouseEnter(object sender, MouseEventArgs e) {
+            window_btnHints.Visibility = Visibility.Visible;
+            window_btnHints.Margin = new Thickness(35, 34, 0, 0);
+            TopBtn_MinimizeWindow.Fill = Brushes.Orange;
+            txt_windowBtnHint.Text = "Minimieren";
+        }
+
+        private void TopBtn_MinimizeWindow_MouseLeave(object sender, MouseEventArgs e) {
+            window_btnHints.Visibility = Visibility.Collapsed;
+            TopBtn_MinimizeWindow.Fill = Brushes.Yellow;
+            GarbageCollector();
+        }
+
+        private void TopBtn_MaximizeWindow_MouseEnter(object sender, MouseEventArgs e) {
+            window_btnHints.Visibility = Visibility.Visible;
+            window_btnHints.Margin = new Thickness(55, 34, 0, 0);
+            TopBtn_MaximizeWindow.Fill = Brushes.DarkGreen;
+            if (window.WindowState == WindowState.Maximized) {
+                txt_windowBtnHint.Text = "Wiederherstellen";
+            } else {
+                txt_windowBtnHint.Text = "Maximieren";
+            }
+        }
+
+        private void TopBtn_MaximizeWindow_MouseLeave(object sender, MouseEventArgs e) {
+            window_btnHints.Visibility = Visibility.Collapsed;
+            TopBtn_MaximizeWindow.Fill = Brushes.Green;
             GarbageCollector();
         }
     }

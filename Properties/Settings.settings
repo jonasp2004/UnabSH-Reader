@@ -5,13 +5,10 @@
     <Setting Name="tempSelectedID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="tempErrMsg" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="Hintergrundunschärfe" Type="System.Double" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
-    <Setting Name="Bildsichtbarkeit" Type="System.Double" Scope="User">
+    <Setting Name="Bildsichtbarkeit" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.2</Value>
     </Setting>
     <Setting Name="Schriftgröße" Type="System.Decimal" Scope="User">
@@ -22,6 +19,9 @@
     </Setting>
     <Setting Name="stdAussehen" Type="System.String" Scope="User">
       <Value Profile="(Default)">std</Value>
+    </Setting>
+    <Setting Name="lieblingsAutoren" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

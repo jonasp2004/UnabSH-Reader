@@ -4,10 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnabSH_Reader" x:Name="window" WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip"
-        Title="UnabSH-Reader" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="{x:Null}" Initialized="window_Initialized">
+        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" FontFamily="{StaticResource VarelaRound}"
+        Title="UnabSH-Reader" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="{x:Null}" Loaded="window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <TextBlock x:Key="mainCursor" Cursor="Cursors/Normal.cur"/>
+            <TextBlock x:Key="handCursor" Cursor="Cursors/Link.cur"/>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="10,10,10,10" Background="#FFE3E1E1" RenderTransformOrigin="0.5,0.5">
+        <Border x:Name="border" Margin="10,10,10,10" CornerRadius="5" Background="#FFE3E1E1" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="windowScale"/>
@@ -17,36 +23,76 @@
                 <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="10"/>
             </Border.Effect>
             <Grid x:Name="content">
-                <Border x:Name="titleBar" Height="43" VerticalAlignment="Top" CornerRadius="10,10,0,0">
+                <Border x:Name="titleBar" Height="30" VerticalAlignment="Top" CornerRadius="5,5,0,0">
                     <Border.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black" Offset="1"/>
-                            <GradientStop Color="#FF2D2D2D" Offset="0"/>
-                        </LinearGradientBrush>
+                        <ImageBrush ImageSource="/UIAssets/window_titlebar.png"/>
                     </Border.Background>
                     <Grid>
-                        <TextBlock x:Name="titleText" Text="UnabSH-Reader" FontFamily="{StaticResource VarelaRound}" FontSize="16" FontWeight="Bold" TextAlignment="Center" Padding="0,11.5,0,0" MouseDown="titleText_MouseDown" Foreground="White"></TextBlock>
-                        <Button BorderBrush="{x:Null}" Margin="39,12,0,11" HorizontalAlignment="Left" Width="21" Click="Button_Click_1">
+                        <TextBlock x:Name="titleText" Text="UnabSH-Reader" TextAlignment="Center" Padding="0,7.5,0,0" MouseDown="titleText_MouseDown" Foreground="Black" FontSize="13"/>
+                        <Button BorderBrush="{x:Null}" Margin="0,4,30,4" HorizontalAlignment="Right" Width="22" Click="Button_Click_1">
                             <Button.Background>
-                                <ImageBrush ImageSource="/Images/settings.png"/>
+                                <ImageBrush ImageSource="/UIAssets/small_sqare-button.png"/>
                             </Button.Background>
+                            <Image Source="/Images/settings.png" Height="12" Width="11" />
                         </Button>
-                        <Image Source="/Images/profilepic.png" HorizontalAlignment="Left" Width="24" Margin="10,10,0,9"/>
-                        <Image x:Name="TopBtn_CloseWindow" Source="/Images/closebutton.png" Margin="0,0,15,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" ToolTip="Schließen"></Image>
-                        <Image x:Name="TopBtn_MaximizeWindow" Source="/Images/maximizebutton.png" Margin="0,0,36,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" ToolTip="Maximieren" HorizontalAlignment="Right" Width="16"/>
-                        <Image x:Name="TopBtn_MinimizeWindow" Source="/Images/minimizebutton.png" Margin="0,0,57,0" HorizontalAlignment="Right" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" ToolTip="Minimieren"/>
+                        <Image Source="/Images/profilepic.png" HorizontalAlignment="Right" Width="20" Margin="0,5,5,5" MouseDown="Image_MouseDown"/>
+                        <Ellipse x:Name="TopBtn_CloseWindow" Fill="Red" Margin="6,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" Stroke="#FFA40000" MouseEnter="TopBtn_CloseWindow_MouseEnter" MouseLeave="TopBtn_CloseWindow_MouseLeave"></Ellipse>
+                        <Ellipse x:Name="TopBtn_MaximizeWindow" Fill="Green" Margin="48,0,0,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" HorizontalAlignment="Left" Width="16" Stroke="#FF005A0A" MouseEnter="TopBtn_MaximizeWindow_MouseEnter" MouseLeave="TopBtn_MaximizeWindow_MouseLeave"/>
+                        <Ellipse x:Name="TopBtn_MinimizeWindow" Fill="Yellow" Margin="27,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" Stroke="#FFC3BB00" MouseEnter="TopBtn_MinimizeWindow_MouseEnter" MouseLeave="TopBtn_MinimizeWindow_MouseLeave"/>
                     </Grid>
                 </Border>
-                <Image Source="/unabs-logo.png" Margin="308,55,308,334"></Image>
-                <TextBlock x:Name="titletext" FontFamily="{StaticResource VarelaRound}" FontSize="25" FontWeight="Bold" Margin="0,102,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Center" Width="458" Foreground="Black"><Run Text="Guten Tag"/><Run Language="de-de" Text=" und Herzlich Willkommen!"/></TextBlock>
-                <TextBlock x:Name="lastUpdatedIndicator" FontFamily="{StaticResource VarelaRound}" FontSize="15" FontWeight="Bold" Margin="87,136,87,0" Height="21" VerticalAlignment="Top" Foreground="Black" TextAlignment="Center"><Run Language="de-de" Text="Benötigte Daten werden abgefangen"/></TextBlock>
-                <ListView x:Name="articleView" Margin="10,162,10,10" FontFamily="{StaticResource VarelaRound}" SelectionChanged="articleView_SelectionChanged" FontSize="16" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="750"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+
+                <Grid Margin="0,30,0,0">
+                    <Grid.Effect>
+                        <BlurEffect x:Name="blr_actionView" Radius="0" />
+                    </Grid.Effect>
+                    <Image Source="/unabs-logo.png" Margin="0,34,0,0" Height="41" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="titletext" FontSize="25" Margin="0,104,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="458" Foreground="Black"><Run Text="Guten Tag"/><Run Language="de-de" Text=" und Herzlich Willkommen!"/></TextBlock>
+                    <TextBlock x:Name="lastUpdatedIndicator" FontSize="15" Margin="0,139,0,0" Height="20" VerticalAlignment="Top" Foreground="Black" TextAlignment="Center" Text="Artikel werden abgerufen. Dies kann etwas dauern." />
+                    <ListView x:Name="articleView" Margin="10,164,10,10" FontFamily="{StaticResource VarelaRound}" SelectionChanged="articleView_SelectionChanged" FontSize="16" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="750"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+                <Grid x:Name="grd_errorOnLoading" Margin="0,30,0,0">
+                    <Grid.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#02FF0000"/>
+                            <GradientStop Color="#19FF0000"/>
+                        </RadialGradientBrush>
+                    </Grid.Background>
+                    <TextBlock x:Name="txt_errDebug" Text="Ein Fehler ist aufgetreten." Foreground="Red" Margin="10,10,0,0" TextWrapping="Wrap" />
+                    <TextBlock Text="Ein Fehler ist aufgetreten." FontSize="22" Margin="0,139,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    <TextBlock Text="Bitte überprüfen Sie Ihre Netzwerkverbindung." FontSize="16" Margin="0,170,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="352" />
+                    <Button x:Name="btn_reloadList" BorderBrush="{x:Null}" Margin="393,200,0,0" Content="Erneut laden" Foreground="White" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88" Click="btn_reloadList_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/UIAssets/btn_blue.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btn_closeProgram" BorderBrush="{x:Null}" Margin="300,200,0,0" Content="Schließen" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88" Click="btn_closeProgram_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/UIAssets/btn_base.png"/>
+                        </Button.Background>
+                    </Button>
+                </Grid>
+                <Grid x:Name="window_btnHints" Margin="2,24,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112">
+                    <Grid.Effect>
+                        <DropShadowEffect Direction="270" ShadowDepth="0" BlurRadius="20" />
+                    </Grid.Effect>
+                    <Border Background="#FFF7F7F7" Margin="7,2,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="10" Height="10" VerticalAlignment="Top" >
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="45"/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border Background="#FFF7F7F7" Margin="0,7,0,0" CornerRadius="3">
+                        <TextBlock x:Name="txt_windowBtnHint" Text="Wiederherstellen" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </Grid>
             </Grid>
             <Border.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
