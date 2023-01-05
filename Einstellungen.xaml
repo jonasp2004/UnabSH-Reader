@@ -25,9 +25,9 @@
                     <Grid>
                         <TextBlock x:Name="titleText" FontSize="13" TextAlignment="Center" Padding="0,7.5,0,0" MouseDown="titleText_MouseDown" Text="Programmeinstellungen"/>
                         <Image Source="/Images/profilepic.png" HorizontalAlignment="Right" Width="22" Margin="0,4,4,4"/>
-                        <Ellipse x:Name="TopBtn_CloseWindow" Fill="Red" Margin="7,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" ToolTip="Schließen" Stroke="DarkRed" MouseEnter="TopBtn_CloseWindow_MouseEnter" MouseLeave="TopBtn_CloseWindow_MouseLeave"></Ellipse>
-                        <Ellipse x:Name="TopBtn_MaximizeWindow" Fill="Green" Margin="49,0,0,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" ToolTip="Maximieren" HorizontalAlignment="Left" Width="16" Stroke="DarkGreen" MouseEnter="TopBtn_MaximizeWindow_MouseEnter" MouseLeave="TopBtn_MaximizeWindow_MouseLeave"/>
-                        <Ellipse x:Name="TopBtn_MinimizeWindow" Fill="Yellow" Margin="28,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" ToolTip="Minimieren" Stroke="Orange" MouseEnter="TopBtn_MinimizeWindow_MouseEnter" MouseLeave="TopBtn_MinimizeWindow_MouseLeave"/>
+                        <Ellipse x:Name="TopBtn_CloseWindow" Fill="Red" Margin="7,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" Stroke="DarkRed" MouseEnter="TopBtn_CloseWindow_MouseEnter" MouseLeave="TopBtn_CloseWindow_MouseLeave"></Ellipse>
+                        <Ellipse x:Name="TopBtn_MaximizeWindow" Fill="Green" Margin="49,0,0,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" HorizontalAlignment="Left" Width="16" Stroke="DarkGreen" MouseEnter="TopBtn_MaximizeWindow_MouseEnter" MouseLeave="TopBtn_MaximizeWindow_MouseLeave"/>
+                        <Ellipse x:Name="TopBtn_MinimizeWindow" Fill="Yellow" Margin="28,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" Stroke="Orange" MouseEnter="TopBtn_MinimizeWindow_MouseEnter" MouseLeave="TopBtn_MinimizeWindow_MouseLeave"/>
                     </Grid>
                 </Border>
                 <ScrollViewer Margin="10,43,10,0" VerticalScrollBarVisibility="Hidden">

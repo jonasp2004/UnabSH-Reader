@@ -31,6 +31,7 @@
     <None Remove="Fonts\VarelaRound.ttf" />
     <None Remove="Images\j_noPicture.png" />
     <None Remove="Images\profilepic.png" />
+    <None Remove="Images\search.png" />
     <None Remove="Images\settings.png" />
     <None Remove="Images\share.png" />
     <None Remove="Images\stop-sign.png" />
@@ -41,6 +42,13 @@
     <None Remove="UIAssets\btn_blue.png" />
     <None Remove="UIAssets\small_sqare-button.png" />
     <None Remove="UIAssets\window_titlebar.png" />
+    <None Remove="UI_textures\active_txtbox_center.png" />
+    <None Remove="UI_textures\active_txtbox_side.png" />
+    <None Remove="UI_textures\btn_base.png" />
+    <None Remove="UI_textures\btn_blue.png" />
+    <None Remove="UI_textures\txtbox_center.png" />
+    <None Remove="UI_textures\txtbox_side.png" />
+    <None Remove="UI_textures\window_bar.png" />
     <None Remove="unabs-logo.png" />
   </ItemGroup>
 
@@ -49,8 +57,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="UI_textures\active_txtbox_side.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Cursors\Link.cur" />
     <Resource Include="Cursors\Normal.cur" />
+    <Resource Include="Images\search.png" />
+    <Resource Include="Images\settings.png" />
     <Resource Include="Images\unknown-person.png" />
     <Resource Include="UIAssets\btn_base.png" />
     <Resource Include="UIAssets\btn_blue.png" />
@@ -79,11 +93,16 @@
   <ItemGroup>
     <Resource Include="Fonts\VarelaRound.ttf" />
     <Resource Include="Images\profilepic.png" />
-    <Resource Include="Images\settings.png" />
     <Resource Include="Images\share.png" />
     <Resource Include="Images\stop-sign.png" />
     <Resource Include="Images\walterscheel.png" />
     <Resource Include="Images\web.png" />
+    <Resource Include="UI_textures\active_txtbox_center.png" />
+    <Resource Include="UI_textures\btn_base.png" />
+    <Resource Include="UI_textures\btn_blue.png" />
+    <Resource Include="UI_textures\txtbox_center.png" />
+    <Resource Include="UI_textures\txtbox_side.png" />
+    <Resource Include="UI_textures\window_bar.png" />
     <Resource Include="unabs-logo.png" />
   </ItemGroup>
 

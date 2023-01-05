@@ -58,33 +58,33 @@
                                 <TextBlock x:Name="articleTitle" TextWrapping="Wrap" FontSize="18" Margin="10,60,0,10" Foreground="White" Text="Artikel wird geladen..." />
                             </Grid>
                         </Border>
-                        <Border Margin="10,135,0,0" CornerRadius="10" Background="#CC000000" Height="67" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250">
+                        <Border Margin="10,135,0,0" CornerRadius="10" Background="#7F000000" Height="62" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250">
                             <Grid>
-                                <Button x:Name="btn_reactionHeart" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center">
+                                <Button x:Name="btn_reactionHeart" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center" Click="btn_reactionHeart_Click">
                                     <Grid Height="37" Width="38">
                                         <TextBlock Text="♥" Margin="0,2,0,0" TextAlignment="Center" FontSize="16" Height="22" VerticalAlignment="Top" Foreground="#FFFF2C2C" />
                                         <TextBlock x:Name="txt_heartIndicator" Text="0" Height="13" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="10" Foreground="White" />
                                     </Grid>
                                 </Button>
-                                <Button x:Name="btn_reactionThumbs_Copy" Background="{x:Null}" BorderBrush="{x:Null}" Margin="57,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center">
+                                <Button x:Name="btn_reactionThumbs_Copy" Background="{x:Null}" BorderBrush="{x:Null}" Margin="57,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center" Click="btn_reactionThumbs_Copy_Click">
                                     <Grid Height="37" Width="38">
-                                        <TextBlock Text="👍" Margin="0,2,0,0" TextAlignment="Center" FontSize="16" Height="22" VerticalAlignment="Top" Foreground="Yellow" />
+                                        <TextBlock Text="👏" Margin="0,2,0,0" TextAlignment="Center" FontSize="16" Height="22" VerticalAlignment="Top" Foreground="Yellow" />
                                         <TextBlock x:Name="txt_likeIndicator" Text="0" Height="13" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="10" Foreground="White" />
                                     </Grid>
                                 </Button>
-                                <Button x:Name="btn_reactionLaugh" Background="{x:Null}" BorderBrush="{x:Null}" Margin="104,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center">
+                                <Button x:Name="btn_reactionLaugh" Background="{x:Null}" BorderBrush="{x:Null}" Margin="104,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center" Click="btn_reactionLaugh_Click">
                                     <Grid Height="37" Width="38">
                                         <TextBlock Text="😂" Margin="0,2,0,0" TextAlignment="Center" FontSize="16" Height="22" VerticalAlignment="Top" Foreground="#FFFFC800" />
                                         <TextBlock x:Name="txt_laughIndicator" Text="0" Height="13" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="10" Foreground="White" />
                                     </Grid>
                                 </Button>
-                                <Button x:Name="btn_reactionSad" Background="{x:Null}" BorderBrush="{x:Null}" Margin="151,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center">
+                                <Button x:Name="btn_reactionSad" Background="{x:Null}" BorderBrush="{x:Null}" Margin="151,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center" Click="btn_reactionSad_Click">
                                     <Grid Height="37" Width="38">
                                         <TextBlock Text="😥" Margin="0,2,0,0" TextAlignment="Center" FontSize="16" Height="22" VerticalAlignment="Top" Foreground="#FFFFFF64" />
                                         <TextBlock x:Name="txt_sadIndicator" Text="0" Height="13" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="10" Foreground="White" />
                                     </Grid>
                                 </Button>
-                                <Button x:Name="btn_reactionANgry" Background="{x:Null}" BorderBrush="{x:Null}" Margin="198,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center">
+                                <Button x:Name="btn_reactionANgry" Background="{x:Null}" BorderBrush="{x:Null}" Margin="198,0,0,0" HorizontalAlignment="Left" Width="42" Height="42" VerticalAlignment="Center" Click="btn_reactionANgry_Click">
                                     <Grid Height="37" Width="38">
                                         <TextBlock Text="😡" Margin="0,2,0,0" TextAlignment="Center" FontSize="16" Height="22" VerticalAlignment="Top" Foreground="#FFC80000" />
                                         <TextBlock x:Name="txt_angryIndicator" Text="0" Height="13" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="10" Foreground="White" />

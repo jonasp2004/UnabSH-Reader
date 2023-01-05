@@ -29,13 +29,20 @@
                     </Border.Background>
                     <Grid>
                         <TextBlock x:Name="titleText" Text="UnabSH-Reader" TextAlignment="Center" Padding="0,7.5,0,0" MouseDown="titleText_MouseDown" Foreground="Black" FontSize="13"/>
-                        <Button BorderBrush="{x:Null}" Margin="0,4,30,4" HorizontalAlignment="Right" Width="22" Click="Button_Click_1">
+                        <Button BorderBrush="{x:Null}" Margin="723,2,0,2" HorizontalAlignment="Left" Width="27" Click="Button_Click_1">
                             <Button.Background>
                                 <ImageBrush ImageSource="/UIAssets/small_sqare-button.png"/>
                             </Button.Background>
-                            <Image Source="/Images/settings.png" Height="12" Width="11" />
+                            <Image Source="/Images/settings.png" Height="15" Width="15" />
                         </Button>
-                        <Image Source="/Images/profilepic.png" HorizontalAlignment="Right" Width="20" Margin="0,5,5,5" MouseDown="Image_MouseDown"/>
+
+                        <Button x:Name="btn_search" BorderBrush="{x:Null}" Margin="697,2,0,2" HorizontalAlignment="Left" Width="26" Click="btn_search_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/UIAssets/small_sqare-button.png"/>
+                            </Button.Background>
+                            <Image Source="/Images/search.png" Height="15" Width="15" />
+                        </Button>
+                        <Image Source="/Images/profilepic.png" HorizontalAlignment="Right" Width="20" Margin="0,5,5,5" ToolTip="Nicolaj, die Nervensäge!" />
                         <Ellipse x:Name="TopBtn_CloseWindow" Fill="Red" Margin="6,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_CloseWindow_MouseDown" Stroke="#FFA40000" MouseEnter="TopBtn_CloseWindow_MouseEnter" MouseLeave="TopBtn_CloseWindow_MouseLeave"></Ellipse>
                         <Ellipse x:Name="TopBtn_MaximizeWindow" Fill="Green" Margin="48,0,0,0" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MaximizeWindow_MouseDown" HorizontalAlignment="Left" Width="16" Stroke="#FF005A0A" MouseEnter="TopBtn_MaximizeWindow_MouseEnter" MouseLeave="TopBtn_MaximizeWindow_MouseLeave"/>
                         <Ellipse x:Name="TopBtn_MinimizeWindow" Fill="Yellow" Margin="27,0,0,0" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center" MouseDown="TopBtn_MinimizeWindow_MouseDown" Stroke="#FFC3BB00" MouseEnter="TopBtn_MinimizeWindow_MouseEnter" MouseLeave="TopBtn_MinimizeWindow_MouseLeave"/>

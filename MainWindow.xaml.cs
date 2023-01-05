@@ -183,11 +183,9 @@ namespace UnabSH_Reader {
             FetchTitles();
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e) {
-            Properties.Settings.Default.tempSelectedID = "Hiermit möchte ich das neue Update auf die Seitenversion 2.3 ankündigen!";
-            viewer view = new viewer();
-            view.Show();
-            GarbageCollector();
+        private void btn_search_Click(object sender, RoutedEventArgs e) {
+            ArticleSearch search = new ArticleSearch();
+            search.Show();
         }
     }
 }

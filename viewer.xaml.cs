@@ -1,8 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,34 +9,43 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Windows.Networking.NetworkOperators;
-using Brushes = System.Windows.Media.Brushes;
-using Color = System.Windows.Media.Color;
-using FontFamily = System.Windows.Media.FontFamily;
 
 namespace UnabSH_Reader {
     public partial class viewer : Window {
 
+        // Contains the article id
         public string appID;
 
+        // Contains the article data
         public string title;
         public string text;
         public string author;
         public string releaseDate;
 
+        // For displaying the amount of the reactions
+        internal int likeCounter;
+        internal int hoorayCounter;
+        internal int funnyCounter;
+        internal int supressCounter;
+        internal int madCounter;
+
+        // Font variables for the viewer
         internal FontFamily varela = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Varela Round");
         internal FontFamily arial = new FontFamily("Arial");
         internal FontFamily courier = new FontFamily("Courier New");
         internal FontFamily comic = new FontFamily("Comic Sans MS");
         internal FontFamily segoe = new FontFamily("Segoe UI");
 
+        // Bitmap variable for the background image
         public BitmapImage bitmapImage = new BitmapImage();
 
         public viewer() {
             InitializeComponent();
+            // Hide the overplay popups
             window_btnHints.Visibility = Visibility.Collapsed;
             grd_authorInfo.Visibility = Visibility.Collapsed;
 
+            // Sets the cursors
             border.Cursor = ((TextBlock)this.Resources["mainCursor"]).Cursor;
             TopBtn_CloseWindow.Cursor = ((TextBlock)this.Resources["handCursor"]).Cursor;
             TopBtn_MaximizeWindow.Cursor = ((TextBlock)this.Resources["handCursor"]).Cursor;
@@ -46,7 +53,6 @@ namespace UnabSH_Reader {
             grd_containerPageSettings.Cursor = ((TextBlock)this.Resources["mainCursor"]).Cursor;
 
             LoadSettings();
-            GarbageCollector();
         }
 
         public void LoadSettings() {
@@ -141,6 +147,13 @@ namespace UnabSH_Reader {
                 }
                 txt_authorName.Text = authorName.Text;
 
+                txt_heartIndicator.Text = likeCounter.ToString();
+                txt_likeIndicator.Text = hoorayCounter.ToString();
+                txt_laughIndicator.Text = funnyCounter.ToString();
+                txt_sadIndicator.Text = supressCounter.ToString();
+                txt_angryIndicator.Text = madCounter.ToString();
+                txt_angryIndicator.Text = madCounter.ToString();
+
                 var backgroundURI = @"https://unabsh.000webhostapp.com/news/images/" + appID + ".png";
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = new Uri(backgroundURI, UriKind.Absolute);
@@ -181,8 +194,9 @@ namespace UnabSH_Reader {
         }
 
         private async Task FetchWebData() {
+            // This will run in another thread for a better performance
             await Task.Run(() => {
-                using (var client = new WebClient()) {
+                using (var client = new WebClient()) {  // Load the article data
                     string html = client.DownloadString("https://unabsh.000webhostapp.com/news/appviewData.php?title=" + Properties.Settings.Default.tempSelectedID);
                     HtmlDocument doc = new HtmlDocument();
                     doc.LoadHtml(html);
@@ -220,6 +234,44 @@ namespace UnabSH_Reader {
                         appID = node.InnerText;
                     }
                     
+                }
+                
+                using (var client = new WebClient()) {  // Load the reactions
+                    string html = client.DownloadString("https://unabsh.000webhostapp.com/news/internal/returnReactions.php?id=" + appID);
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.LoadHtml(html);
+                    var nodes = doc.DocumentNode.SelectNodes("//span")
+                        .Where(d => d.Attributes.Contains("id"))
+                        .Where(d => d.Attributes["id"].Value == "like");
+                    foreach (HtmlNode node in nodes) {
+                        likeCounter = Convert.ToInt16(node.InnerText);
+                    }
+
+                    nodes = doc.DocumentNode.SelectNodes("//span")
+                        .Where(d => d.Attributes.Contains("id"))
+                        .Where(d => d.Attributes["id"].Value == "hooray");
+                    foreach (HtmlNode node in nodes) { 
+                        hoorayCounter = Convert.ToInt16(node.InnerText);
+                    }
+
+                    nodes = doc.DocumentNode.SelectNodes("//span")
+                        .Where(d => d.Attributes.Contains("id"))
+                        .Where(d => d.Attributes["id"].Value == "lol");
+                    foreach (HtmlNode node in nodes) {
+                        funnyCounter = Convert.ToInt16(node.InnerText);
+                    }
+                    nodes = doc.DocumentNode.SelectNodes("//span")
+                        .Where(d => d.Attributes.Contains("id"))
+                        .Where(d => d.Attributes["id"].Value == "sad");
+                    foreach (HtmlNode node in nodes) {
+                        supressCounter = Convert.ToInt16(node.InnerText);
+                    }
+                    nodes = doc.DocumentNode.SelectNodes("//span")
+                        .Where(d => d.Attributes.Contains("id"))
+                        .Where(d => d.Attributes["id"].Value == "mad");
+                    foreach (HtmlNode node in nodes) {
+                        madCounter = Convert.ToInt16(node.InnerText);
+                    }
                 }
             });
             GarbageCollector();
@@ -406,6 +458,49 @@ namespace UnabSH_Reader {
                 btn_addFavouriteAuthor.Foreground = Brushes.White;
                 btn_addFavouriteAuthor.Background = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/UIAssets/btn_blue.png")));
             }
+        }
+
+        internal void AssignReaction(string reaction) {
+            try {
+                using (var client = new WebClient()) {
+                    string html = client.DownloadString("https://unabsh.000webhostapp.com/news/internal/assign_reaction.php?react=" + reaction + "&id=" + appID + "&usr=guest");
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.LoadHtml(html);
+                }
+            } catch {
+                err_dialog error = new err_dialog("Fehler: Konnte Reaktion nicht hinzufügen. Bitte überprüfen Sie Ihre Netzwerkverbindung!");
+                error.ShowDialog();
+            }
+        }
+
+        private void btn_reactionHeart_Click(object sender, RoutedEventArgs e) {
+            AssignReaction("like");
+            hoorayCounter++;
+            txt_heartIndicator.Text = hoorayCounter.ToString();
+        }
+
+        private void btn_reactionThumbs_Copy_Click(object sender, RoutedEventArgs e) {
+            AssignReaction("hooray");
+            likeCounter++;
+            txt_likeIndicator.Text = likeCounter.ToString();
+        }
+
+        private void btn_reactionLaugh_Click(object sender, RoutedEventArgs e) {
+            AssignReaction("lol");
+            funnyCounter++;
+            txt_laughIndicator.Text = funnyCounter.ToString();
+        }
+
+        private void btn_reactionSad_Click(object sender, RoutedEventArgs e) {
+            AssignReaction("sad");
+            supressCounter++;
+            txt_laughIndicator.Text = supressCounter.ToString();
+        }
+
+        private void btn_reactionANgry_Click(object sender, RoutedEventArgs e) {
+            AssignReaction("mad");
+            madCounter++;
+            txt_angryIndicator.Text = madCounter.ToString();
         }
     }
 }
